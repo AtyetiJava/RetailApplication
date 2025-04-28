@@ -1,14 +1,10 @@
 package com.mentorassignment.RetailApplication.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mentorassignment.RetailApplication.exception.ProductNotFoundException;
 import com.mentorassignment.RetailApplication.model.Product;
 import com.mentorassignment.RetailApplication.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -27,7 +23,7 @@ public class ProductService {
     }
 
     public Product saveProduct(Product product) {
-        return productRepository.save(product);
+         return productRepository.save(product);
     }
 
     public void deleteProduct(Long id) {

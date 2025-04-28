@@ -1,25 +1,91 @@
 package com.mentorassignment.RetailApplication.model;
 
-import java.util.List;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
+import java.util.List;
+
+@Entity
+@Table(name="orders")
 public class Order{
 
-	@JsonProperty("total")
-	private Object total;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    public int orderId;
 
-	@JsonProperty("orderId")
-	private int orderId;
+    public int userId;
 
-	@JsonProperty("userId")
-	private int userId;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private List<OrderItem> items;
 
-	@JsonProperty("items")
-	private List<ItemsItem> items;
+    public double total;
+    public String status;
+    public String orderDate;
 
-	@JsonProperty("orderDate")
-	private String orderDate;
+    public List<OrderItem> getItems() {
+        return items;
+    }
 
-	@JsonProperty("status")
-	private String status;
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "items=" + items +
+                ", orderId=" + orderId +
+                ", userId=" + userId +
+                ", total=" + total +
+                ", status='" + status + '\'' +
+                ", orderDate='" + orderDate + '\'' +
+                '}';
+    }
 }
+
+// class Root{
+//    @JsonProperty("Order")
+//    public Order order;
+//}
+
