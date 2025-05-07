@@ -2,6 +2,7 @@ package com.mentorassignment.RetailApplication.controller;
 
 import com.mentorassignment.RetailApplication.model.Product;
 import com.mentorassignment.RetailApplication.repository.ProductRepository;
+import com.mentorassignment.RetailApplication.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,31 +11,32 @@ import java.util.List;
 @RestController
 @RequestMapping("/product")
 class ProductController{
-    private ProductRepository repo;
+    private ProductService productService;
 
     @Autowired
-    public ProductController(ProductRepository repo) {
-        this.repo = repo;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
+
 
     @GetMapping("/get")
     public List<Product> getProducts(){
-        return repo.findAll();
+        return productService.getAllProducts();
     }
 
     @PostMapping("/add")
     public void addProduct(@RequestBody Product product){
-        repo.save(product);
+       productService.saveProduct(product);
     }
 
     @DeleteMapping("/remove/{id}")
-    public void removeProduct(@PathVariable("id") Product product ){
-        repo.delete(product);
+    public void removeProduct(@PathVariable("id") Long id ){
+      productService.deleteProduct(id);
     }
 
     @PutMapping("update/{id}")
     public void updateProduct(@PathVariable String id,@RequestBody Product product){
-        repo.save(product);
+        productService.saveProduct(product);
     }
 }
 

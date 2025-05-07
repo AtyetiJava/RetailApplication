@@ -7,13 +7,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class OrderItem{
+public class OrderItem {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	public int productId;
-	public int quantity;
-	public double price;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long orderItemId;
+
+	private int productId;
+	private int quantity;
+	private double price;
+
+	public Long getOrderItemId() {
+		return orderItemId;
+	}
+
+	public void setOrderItemId(Long orderItemId) {
+		this.orderItemId = orderItemId;
+	}
 
 	public double getPrice() {
 		return price;
@@ -42,9 +52,10 @@ public class OrderItem{
 	@Override
 	public String toString() {
 		return "OrderItem{" +
-				"price=" + price +
+				"orderItemId=" + orderItemId +
 				", productId=" + productId +
 				", quantity=" + quantity +
+				", price=" + price +
 				'}';
 	}
 }

@@ -1,6 +1,5 @@
 package com.mentorassignment.RetailApplication;
 
-import com.mentorassignment.RetailApplication.service.ProductService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
