@@ -1,30 +1,24 @@
 package com.mentorassignment.RetailApplication.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name="user")
 @Data
-
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userId;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    private String userName;
 
-	@Column(nullable = false)
+    private String password;
 
-	private String address;
+    private String mail;
 
-
-	private String name;
-
-
-	private String email;
-
+    private String address;
 
 }

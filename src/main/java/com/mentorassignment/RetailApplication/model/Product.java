@@ -1,26 +1,23 @@
 package com.mentorassignment.RetailApplication.model;
 
+
+
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 @Entity
-@Table(name = "product")
+@Table(name="product")
 @Data
-
 public class Product {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long productId;
 
-	@Column(nullable = false)
-	private String name;
+    private String productName;
 
-	private String description;
+    private int quantity;
 
-	private BigDecimal price;
+    private double price;
 
-	private int stock;
 }

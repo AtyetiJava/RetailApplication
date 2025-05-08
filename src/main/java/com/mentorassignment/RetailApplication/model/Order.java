@@ -1,28 +1,32 @@
 package com.mentorassignment.RetailApplication.model;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
-@Table(name="orders")
+@Table(name="order")
 @Data
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int orderId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(columnDefinition = "VARCHAR(10)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID orderId;
 
-    public int userId;
+    @JoinColumn(name = "order_summary_summary_id")
+    private OrderSummary orderSummary;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private List<OrderItem> items;
+    private LocalDateTime localDateTime;
 
-    public double total;
-    public String status;
-    public String orderDate;
+    @JoinColumn(name = "user_user_id")
+    private User user;
+
 
 }
-

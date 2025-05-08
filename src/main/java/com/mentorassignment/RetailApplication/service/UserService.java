@@ -6,32 +6,38 @@ import com.mentorassignment.RetailApplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class UserService {
-
+    private static final Logger logger = Logger.getLogger(UserService.class.getName());
     @Autowired
     private UserRepository userRepository;
+    public String userLogin(String mail, String password)
+    {
+       User user = userRepository.findByEmailAndPassword(mail, password);
+        if(user!=null)
+        {
+            return user.getUserName();
+        }
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+        logger.warning("User email or password invalid");
+        throw new UserNotFoundException("User email or password invalid");
     }
 
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
+
+    public String userRegister(User user) {
+
+        if(userRepository.findByEmail(user.getMail())!=null)
+        {
+            logger.warning("User Already exist");
+           throw new UserNotFoundException("User Already exist");
+        }
+
+        userRepository.save(user);
+        return "home";
+
     }
 
-    public User getUserById(Long id){
-        return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-    }
 
-    public User saveUser(User user){
-        return userRepository.save(user);
-    }
-
-    public void deleteUser(Long id){
-        userRepository.deleteById(id);
-    }
 }

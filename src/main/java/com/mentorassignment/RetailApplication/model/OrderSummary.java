@@ -3,20 +3,19 @@ package com.mentorassignment.RetailApplication.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
-
 @Entity
-@Table(name="cart")
+@Table(name="orderSummary")
 @Data
-public class Cart {
+public class OrderSummary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderNumber;
+    private long summaryId;
 
-    private List<Product> productList;
+    @JoinColumn(name = "product_product_id")
+    private Product product;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_user_id")
     private User user;
 
