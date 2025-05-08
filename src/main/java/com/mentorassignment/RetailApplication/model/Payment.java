@@ -1,7 +1,9 @@
 package com.mentorassignment.RetailApplication.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 public class Payment{
 
 	@JsonProperty("amount")
